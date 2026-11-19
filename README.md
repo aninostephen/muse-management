@@ -104,7 +104,7 @@ npm install
 
 ## 5. Environment Configuration
 
-Create `backend/.env` based on [backend/.env.example](file:///d:/findjob/MuseManagement/backend/.env.example):
+Create `backend/.env` based on [backend/.env.example](file:///d:/your-root-folder/backend/.env.example):
 
 ```env
 PORT=3000
@@ -135,7 +135,7 @@ VITE_API_BASE_URL=http://localhost:3000/api
 
 ## 6. Running Both Backend & Frontend Simultaneously (Root Scripts)
 
-From the root directory (`d:\findjob\MuseManagement`), you can start, build, or test both the NestJS backend and React frontend together using [package.json](file:///d:/findjob/MuseManagement/package.json):
+From the root directory (`c:\your-root-folder`), you can start, build, or test both the NestJS backend and React frontend together using [package.json](file:///c:/your-root-folder/package.json):
 
 ```bash
 # Run both NestJS backend (http://localhost:3000) and Vite frontend (http://localhost:5173) at the same time
@@ -199,7 +199,7 @@ npm run build
 ## 8. API Documentation References
 
 - **Official Infloww OpenAPI Portal**: `https://infloww-openapi.stoplight.io/`
-- **Phase 1 Technical Analysis**: [docs/API_ANALYSIS.md](file:///d:/findjob/MuseManagement/docs/API_ANALYSIS.md)
+- **Phase 1 Technical Analysis**: [docs/API_ANALYSIS.md](file:///d:/your-root-folder/docs/API_ANALYSIS.md)
 - **Local Backend Swagger UI**: `http://localhost:3000/api/docs`
 
 ---
@@ -220,7 +220,7 @@ npm run build
 
 ## 10. Known Infloww API Limitations
 
-As documented in [docs/API_ANALYSIS.md](file:///d:/findjob/MuseManagement/docs/API_ANALYSIS.md):
+As documented in [docs/API_ANALYSIS.md](file:///d:/your-root-folder/docs/API_ANALYSIS.md):
 1. **No External Promotion Cost / Ad Spend Field**:
    - `GET /v1/links` provides clicks, subscribers, conversion rates, EPC, AEPS, and attributed gross/net revenue, but does not store external marketing spend (`Promotion Cost`). Cost per Subscriber and cost-based ROI are therefore explicitly labeled **Unavailable** in the UI rather than fabricated.
 2. **Clicks Are Tracked Only on `TRACKING` Links**:
