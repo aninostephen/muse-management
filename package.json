@@ -1,0 +1,17 @@
+{
+  "name": "muse-agency-management-dashboard",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Agency Management Dashboard (NestJS Backend + React 19 Vite Frontend) integrated with Infloww OpenAPI v1.4",
+  "scripts": {
+    "dev": "node -e \"const { spawn } = require('child_process'); const procs = [spawn('npm', ['--prefix', 'backend', 'run', 'start:dev'], { stdio: 'inherit', shell: true }), spawn('npm', ['--prefix', 'frontend', 'run', 'dev'], { stdio: 'inherit', shell: true })]; process.on('SIGINT', () => procs.forEach(p => p.kill()));\"",
+    "start": "npm run dev",
+    "dev:backend": "npm --prefix backend run start:dev",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "build": "npm --prefix backend run build && npm --prefix frontend run build",
+    "build:backend": "npm --prefix backend run build",
+    "build:frontend": "npm --prefix frontend run build",
+    "test": "npm --prefix backend test",
+    "install:all": "npm --prefix backend install && npm --prefix frontend install"
+  }
+}
