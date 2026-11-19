@@ -1,4 +1,4 @@
-# Muse Agency Management Dashboard — Infloww OpenAPI v1.4
+# Muse Agency Management Dashboard — Technical assessment
 
 ## 1. Project Overview
 
@@ -217,17 +217,3 @@ npm run build
    - Explicitly distinguishes `0` (`$0.00` / `0`), missing report data (`Unavailable`), and unexposed API fields.
 
 ---
-
-## 10. Known Infloww API Limitations
-
-As documented in [docs/API_ANALYSIS.md](file:///d:/your-root-folder/docs/API_ANALYSIS.md):
-1. **No External Promotion Cost / Ad Spend Field**:
-   - `GET /v1/links` provides clicks, subscribers, conversion rates, EPC, AEPS, and attributed gross/net revenue, but does not store external marketing spend (`Promotion Cost`). Cost per Subscriber and cost-based ROI are therefore explicitly labeled **Unavailable** in the UI rather than fabricated.
-2. **Clicks Are Tracked Only on `TRACKING` Links**:
-   - Only `linkType=TRACKING` (`TrackingLinkModel`) exposes `clickCount`, `subscriptionCVR`, and `epcGross/Net`. `TRIAL` (Free Trial Links) and `CAMPAIGN` (Profile Promotions) track `subCount`, `payingFansCount`, `spendClaim`, and `earningsGross/Net`.
-3. **31-Day Maximum Window per Single Request**:
-   - Infloww time-filtered endpoints cap each HTTP request to a 31-day span (up to 366 days in the past). Our NestJS backend automatically splits multi-month ranges into `<= 30-day` chunks.
-4. **Optional API Key Scopes (`All Creators` & `Organization`)**:
-   - Endpoints such as `GET /v1/all-creators` and `GET /v1/transaction-perf/details` require the `"All Creators"` scope on the agency's API key. If an API key only has the standard connected-creators scope and receives `403`, `InflowwService` gracefully falls back to `GET /v1/creators` and `GET /v1/employee-report/*` while reporting `allCreatorsScopeAvailable: false` in the response metadata.
-5. **Upstream OnlyFans Synchronization Latency**:
-   - Infloww documents an upstream sync delay of up to 1 hour for creators, transactions, and refunds; up to 2 hours for links; and up to 4 hours for link fans.
