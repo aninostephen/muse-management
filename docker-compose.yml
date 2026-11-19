@@ -1,0 +1,36 @@
+services:
+  muse-backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: muse-agency-be
+    restart: unless-stopped
+    env_file:
+      - ./backend/.env
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+    expose:
+      - "3000"
+    networks:
+      - muse-network
+
+  muse-frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        VITE_API_BASE_URL: /api
+    container_name: muse-agency-fe
+    restart: unless-stopped
+    ports:
+      # Binds to 127.0.0.1:3080->80/tcp to match your server's existing reverse-proxy upstream
+      - "127.0.0.1:3080:80"
+    depends_on:
+      - muse-backend
+    networks:
+      - muse-network
+
+networks:
+  muse-network:
+    driver: bridge

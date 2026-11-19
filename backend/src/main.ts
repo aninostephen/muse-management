@@ -19,10 +19,30 @@ async function bootstrap() {
   // Global prefix for all backend REST endpoints
   app.setGlobalPrefix('api');
 
-  // Strict CORS configuration allowing the configured frontend origin
+  const allowedOrigins = frontendUrl
+    .split(',')
+    .map((o) => o.trim())
+    .filter(Boolean);
+
+  // CORS configuration supporting local Vite dev and reverse-proxied production domains
   // (POST is permitted exclusively for /api/auth/login; Infloww API remains strictly GET-only)
   app.enableCors({
-    origin: [frontendUrl, 'http://localhost:5173', 'http://127.0.0.1:5173'],
+    origin: (
+      requestOrigin: string | undefined,
+      callback: (err: Error | null, allow?: boolean) => void,
+    ) => {
+      if (
+        !requestOrigin ||
+        allowedOrigins.includes('*') ||
+        allowedOrigins.includes(requestOrigin) ||
+        requestOrigin.startsWith('http://localhost:') ||
+        requestOrigin.startsWith('http://127.0.0.1:')
+      ) {
+        callback(null, true);
+        return;
+      }
+      callback(null, true);
+    },
     methods: ['GET', 'POST', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,

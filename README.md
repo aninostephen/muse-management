@@ -151,6 +151,15 @@ npm test
 npm run install:all
 ```
 
+### Docker Compose Deployment (Production Server)
+To deploy both the NestJS backend and Nginx-served React frontend via Docker Compose (bound to `127.0.0.1:3080->80/tcp` with `/api/*` proxied internally to `muse-backend:3000`):
+
+```bash
+# 1. Ensure backend/.env exists with INFLOWW_API_KEY and INFLOWW_AGENCY_OID
+# 2. Build and start both containers in detached mode
+docker compose up -d --build
+```
+
 ---
 
 ## 7. Individual Backend Startup & Testing Instructions
